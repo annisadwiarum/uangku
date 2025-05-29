@@ -1,3 +1,5 @@
+# uangku
+Challenge 30 hari ngoding (web apps managemen keuangan)
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
