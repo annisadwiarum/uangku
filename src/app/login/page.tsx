@@ -12,7 +12,7 @@ interface dataUser {
 }
 
 function Login() {
-  const [data, setData] = useState<dataUser>({
+  const [user, setUser] = useState<dataUser>({
     email: "",
     password: "",
   });
@@ -20,19 +20,27 @@ function Login() {
   const login = async () => {
     try {
       const { data: dataUser, error } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
+        email: user.email,
+        password: user.password,
       });
-
-      if (data) console.log(data);
+  
+      if (error) {
+        console.error("Login gagal:", error.message);
+        return;
+      }
+  
+      if (dataUser) {
+        console.log("Login berhasil:", dataUser);
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Terjadi error:", error);
     }
   };
+  
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setData((prev: any) => ({
+    setUser((prev: any) => ({
       ...prev,
       [name]: value,
     }));
@@ -46,14 +54,14 @@ function Login() {
           type="email"
           placeholder="Email"
           name="email"
-          value={data?.email}
+          value={user?.email}
           onChange={handleChange}
         />
         <Input
           type="password"
           placeholder="Password"
           name="password"
-          value={data?.password}
+          value={user?.password}
           onChange={handleChange}
         />
         <Button
