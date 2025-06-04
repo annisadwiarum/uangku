@@ -14,12 +14,9 @@ export async function POST(req: NextRequest) {
     cookies: () => cookieStore,
   });
 
-  await supabase.auth.signUp({
+  await supabase.auth.signInWithPassword({
     email,
     password,
-    options: {
-      emailRedirectTo: `${url.origin}/auth/callback`,
-    },
   });
 
   return NextResponse.redirect(url.origin, {

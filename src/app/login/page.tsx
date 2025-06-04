@@ -3,40 +3,28 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/lib/supabase";
+import { Auth } from "@/types/auth";
 import React, { useState } from "react";
-
-interface dataUser {
-  email: string;
-  password: string;
-}
+import { useForm } from "react-hook-form";
 
 function Login() {
-  const [user, setUser] = useState<dataUser>({
+  const [user, setUser] = useState<Auth>({
     email: "",
     password: "",
   });
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const login = async () => {
     try {
-      const { data: dataUser, error } = await supabase.auth.signInWithPassword({
-        email: user.email,
-        password: user.password,
-      });
-  
-      if (error) {
-        console.error("Login gagal:", error.message);
-        return;
-      }
-  
-      if (dataUser) {
-        console.log("Login berhasil:", dataUser);
-      }
     } catch (error) {
       console.error("Terjadi error:", error);
     }
   };
-  
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -48,8 +36,8 @@ function Login() {
 
   return (
     <div className="h-screen flex justify-center items-center bg-gray-200">
-      <div className="flex flex-col gap-5 bg-white w-lg py-10 px-14 rounded-xl shadow-lg border">
-        <h1 className=" text-center font-semibold text-2xl mb-5">Login Page</h1>
+      <form onSubmit={handleSubmit(login)} className="flex flex-col gap-5 bg-white w-lg py-10 px-14 rounded-xl shadow-lg border">
+        <h1 className=" text-center font-semibold text-2xl mb-5">Login</h1>
         <Input
           type="email"
           placeholder="Email"
@@ -67,11 +55,11 @@ function Login() {
         <Button
           variant="secondary"
           className="bg-gray-200 shadow-sm"
-          onClick={login}
+          type="submit"
         >
           Login
         </Button>
-      </div>
+      </form>
     </div>
   );
 }
