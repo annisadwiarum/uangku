@@ -7,10 +7,9 @@ export async function middleware(req: NextRequest) {
 
   const { data, error } = await supabase.auth.getSession();
 
-  console.log(data);
-  console.log(error);
+  console.log('dataaaaaaaaaaaaaa', data);
+  console.log('errorrrrrrrrrrrrr:', error);
 
   return res;
 }
 
-export const config = {};

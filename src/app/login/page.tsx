@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -8,35 +8,42 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function Login() {
-  const [user, setUser] = useState<Auth>({
-    email: "",
-    password: "",
-  });
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
+  // const [user, setUser] = useState<Auth>({
+  //   email: "",
+  //   password: "",
+  // });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   control,
+  //   formState: { errors },
+  // } = useForm();
 
-  const login = async () => {
-    try {
-    } catch (error) {
-      console.error("Terjadi error:", error);
-    }
-  };
+  // const login = async () => {
+  //   try {
+  //   } catch (error) {
+  //     console.error("Terjadi error:", error);
+  //   }
+  // };
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setUser((prev: any) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e: any) => {
+  //   const { name, value } = e.target;
+  //   setUser((prev: any) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <div className="h-screen flex justify-center items-center bg-gray-200">
-      <form onSubmit={handleSubmit(login)} className="flex flex-col gap-5 bg-white w-lg py-10 px-14 rounded-xl shadow-lg border">
+      <form action="/auth/login" method="post">
+        <label htmlFor="email">Email</label>
+        <input type="email" />
+        <label htmlFor="password">Password</label>
+        <input type="password" />
+        <button>sign up</button>
+      </form>
+      {/* <form onSubmit={handleSubmit(login)} className="flex flex-col gap-5 bg-white w-lg py-10 px-14 rounded-xl shadow-lg border">
         <h1 className=" text-center font-semibold text-2xl mb-5">Login</h1>
         <Input
           type="email"
@@ -59,7 +66,7 @@ function Login() {
         >
           Login
         </Button>
-      </form>
+      </form> */}
     </div>
   );
 }
